@@ -182,10 +182,9 @@ Item {
 				}
 
 				onClicked: {
-					Control.associateItem(playerButton, 'Raise');
+					Control.callCommand('Raise');
 				}
 			}
-
 			// album art and metadata
 			Row {
 				spacing: 20
@@ -229,7 +228,7 @@ Item {
 				Plasma.ToolButton {
 					id: prevButton
 					height: 48
-					iconSource: plasmoid.file('images', 'media-skip-backward.svgz')
+					iconSource: 'media-skip-backward';
 					onClicked: {
 						Control.callCommand('Previous');
 					}
@@ -242,7 +241,7 @@ Item {
 					id: playPauseButton
 					height: 48
 					property string operation: (source.playbackStatus == 'Playing' ? 'Pause' : 'Play')
-					iconSource: (source.playbackStatus == 'Playing') ? plasmoid.file('images', 'media-playback-pause.svgz') : plasmoid.file('images', 'media-playback-start.svgz')
+					iconSource: (source.playbackStatus == 'Playing') ? 'media-playback-pause' : 'media-playback-start'
 					onClicked: {
 						Control.callCommand(operation);
 					}
@@ -257,7 +256,7 @@ Item {
 				Plasma.ToolButton {
 					id: stopButton
 					height: 48
-					iconSource: plasmoid.file('images', 'media-playback-stop.svgz')
+					iconSource: 'media-playback-stop.svgz'
 					onClicked: {
 						Control.callCommand('Stop');
 					}
@@ -269,12 +268,22 @@ Item {
 				Plasma.ToolButton {
 					id: nextButton
 					height: 48
-					iconSource: plasmoid.file('images', 'media-skip-forward.svgz')
+					iconSource: 'media-skip-forward'
 					onClicked: {
 						Control.callCommand('Next');
 					}
 					Component.onCompleted: {
 						Control.associateItem(nextButton, 'Next');
+					}
+				}
+				// Quit player
+				Plasma.ToolButton {
+					id: quitButton
+					height: 48;
+					iconSource: "application-exit"
+					visible: (source.identity)
+					onClicked: {
+						Control.callCommand('Quit')
 					}
 				}
 
